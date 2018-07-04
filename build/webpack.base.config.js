@@ -1,7 +1,7 @@
 const path = require('path');
-// const vueConfig = require('./vue-loader.config');
+const vueConfig = require('./vue-loader.config');
 
-// const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   // devtool: isProd
@@ -35,41 +35,41 @@ module.exports = {
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
-      // {
-      //   test: /\.(js|vue)$/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   exclude: /node_modules/,
-      //   options: {
-      //     cache: !isProd,
-      //   },
-      // },
-      // {
-      //   test: /\.vue$/,
-      //   loader: 'vue-loader',
-      //   options: vueConfig,
-      // },
-      // {
-      //   test: /\.js$/,
-      //   loader: `babel-loader${!isProd ? '?cacheDirectory=true' : ''}`,
-      //   exclude: /node_modules/,
-      // },
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        exclude: /node_modules/,
+        options: {
+          cache: !isProd,
+        },
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueConfig,
+      },
+      {
+        test: /\.js$/,
+        loader: `babel-loader${!isProd ? '?cacheDirectory=true' : ''}`,
+        exclude: /node_modules/,
+      },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
-        loader: 'file-loader',
-        // options: {
-        //   limit: 10240,
-        //   name: '[name].[ext]?[hash]',
-        // },
+        loader: 'url-loader',
+        options: {
+          limit: 10240, // 10240 byte, 1.024kb
+          name: '[name].[ext]?[hash]',
+        },
       },
-      // {
-      //   test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   query: {
-      //     limit: 10000,
-      //     name: 'fonts/[name].[hash:7].[ext]',
-      //   },
-      // },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'fonts/[name].[hash:7].[ext]',
+        },
+      },
       // {
       //   test: /\.svg/,
       //   loader: 'svg-loader',

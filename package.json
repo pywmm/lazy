@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^8.6.4",
     "babel-eslint": "^8.2.5",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -23,9 +24,12 @@
     "file-loader": "^1.1.11",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
+    "vue-loader": "^15.2.4",
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
     "vue": "^2.5.16",
     "webpack": "^4.14.0"
   }
