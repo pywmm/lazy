@@ -1,4 +1,7 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const vueConfig = require('./vue-loader.config');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -10,6 +13,7 @@ module.exports = {
   mode: 'development',
   entry: {
     app: path.resolve(__dirname, '../src/entries/app.js'),
+    app2: path.resolve(__dirname, '../src/entries/app2.js'),
     // vendor: [
     //   'es6-promise/auto',
     //   'vue',
@@ -22,8 +26,7 @@ module.exports = {
   output: {
     // publicPath: './../dist/',
     path: path.resolve(__dirname, '../dist'),
-    // filename: '[name].[chunkhash].js',
-    filename: '[name].js',
+    filename: '[name].[chunkhash].js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -32,6 +35,25 @@ module.exports = {
       '@': path.resolve(__dirname, '../src'),
     },
   },
+  plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),
+    }),
+    new HtmlWebpackPlugin({
+      // title: 'modify  auto created html title',
+      filename: 'lazy.html', // the name of html file which created at last
+      template: path.resolve(__dirname, '../src/index.html'), // html template
+      chunks: ['app'],
+      htmlWebpackPlugin: {
+        options: {
+          title: 'test',
+        },
+      },
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'another.html',
+    }),
+  ],
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
