@@ -27,6 +27,7 @@ module.exports = {
     // publicPath: './../dist/',
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -54,6 +55,29 @@ module.exports = {
       filename: 'another.html',
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'testSplitChunks',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          name: 'vendors',
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [

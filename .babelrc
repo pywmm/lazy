@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    // "babel-plugin-syntax-dynamic-import",
+    "transform-object-rest-spread",
+    "transform-runtime",
+  ],
+  "comments": true,
+  "env": {
+    "dev": {
+      "presets": [
+        ["env", { "modules": false }],
+      ],
+    },
+    // "dev": {
+    //   "presets": [
+    //     ["env", { "modules": false }],
+    //   ],
+    // },
+    // "prod": {
+    //   "presets": [
+    //     ["env", { "modules": false }],
+    //   ],
+    // },
+  }
+}
