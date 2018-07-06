@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "./node_modules/.bin/eslint src/*",
     "fix": "./node_modules/.bin/eslint src/* build/* --fix",
-    "build": "webpack --config ./build/webpack.base.config.js"
+    "build": "webpack --config ./build/webpack.base.config.js",
+    "start": "webpack-dev-server --config ./build/webpack.base.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -29,7 +30,8 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "vue-loader": "^15.2.4",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
     "babel-core": "^6.26.3",

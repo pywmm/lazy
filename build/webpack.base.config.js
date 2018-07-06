@@ -11,6 +11,27 @@ module.exports = {
   //   ? 'source-map'
   //   : false,
   mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    // contentBase: path.resolve(__dirname, '../dist'),
+    port: 9000,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/test/, to: '/index.html' },
+      ],
+    },
+    hot: false,
+    noInfo: false,
+    overlay: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/api': '' },
+      },
+    },
+    quiet: false,
+    // publicPath: '/assets/2/',
+  },
   entry: {
     app: path.resolve(__dirname, '../src/entries/app.js'),
     app2: path.resolve(__dirname, '../src/entries/app2.js'),
@@ -24,7 +45,7 @@ module.exports = {
     // ],
   },
   output: {
-    // publicPath: './../dist/',
+    publicPath: '/assets/1/',
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].bundle.js',
@@ -41,19 +62,14 @@ module.exports = {
       root: path.resolve(__dirname, '../'),
     }),
     new HtmlWebpackPlugin({
-      // title: 'modify  auto created html title',
-      filename: 'lazy.html', // the name of html file which created at last
+      filename: 'index.html', // the name of html file which created at last
       template: path.resolve(__dirname, '../src/index.html'), // html template
-      chunks: ['app'],
-      htmlWebpackPlugin: {
-        options: {
-          title: 'test',
-        },
-      },
+      // chunks: ['app'],
+      title: '121212',
     }),
-    new HtmlWebpackPlugin({
-      filename: 'another.html',
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'another.html',
+    // }),
   ],
   optimization: {
     splitChunks: {

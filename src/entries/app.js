@@ -2,10 +2,6 @@ import Vue from 'vue';
 import './test.css';
 import Icon from './test.jpeg';
 
-
-console.log('i am app.js my self ');
-console.log(Icon);
-
 function component() {
   const element = document.createElement('div');
   element.classList.add('hello');
