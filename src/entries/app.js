@@ -2,6 +2,8 @@ import Vue from 'vue';
 import './test.css';
 import Icon from './test.jpeg';
 
+
+console.log('i am app.js my self ');
 console.log(Icon);
 
 function component() {
@@ -24,5 +26,3 @@ export function createApp() {
   });
   return app;
 }
-
-console.log('has bundle success!');
