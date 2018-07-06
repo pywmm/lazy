@@ -18,7 +18,7 @@ document.body.appendChild(component());
 
 export function createApp() {
   const app = new Vue({
-    data: 1,
+    data: 3,
   });
   return app;
 }

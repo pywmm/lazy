@@ -30,6 +30,7 @@ module.exports = {
       },
     },
     quiet: false,
+    open: true,
     // publicPath: '/assets/2/',
   },
   entry: {
@@ -45,7 +46,7 @@ module.exports = {
     // ],
   },
   output: {
-    publicPath: '/assets/1/',
+    publicPath: '/',
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].bundle.js',
