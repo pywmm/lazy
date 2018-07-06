@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const vueConfig = require('./vue-loader.config');
 
@@ -10,7 +11,8 @@ module.exports = {
   // devtool: isProd
   //   ? 'source-map'
   //   : false,
-  mode: 'development',
+  // mode: 'development',
+  mode: 'production',
   devtool: 'inline-source-map',
   devServer: {
     // contentBase: path.resolve(__dirname, '../dist'),
@@ -20,7 +22,7 @@ module.exports = {
         { from: /^\/test/, to: '/index.html' },
       ],
     },
-    hot: false,
+    hot: true,
     noInfo: false,
     overlay: true,
     proxy: {
@@ -48,7 +50,7 @@ module.exports = {
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     chunkFilename: '[name].bundle.js',
   },
   resolve: {
@@ -71,6 +73,7 @@ module.exports = {
     // new HtmlWebpackPlugin({
     //   filename: 'another.html',
     // }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   optimization: {
     splitChunks: {

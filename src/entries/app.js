@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import './test.css';
 import Icon from './test.jpeg';
+import { cube } from './math';
+
+cube(5);
 
 function component() {
   const element = document.createElement('div');
