@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import './test.css';
-import Icon from './test.jpeg';
+import Icon from './test.jpg';
 import { cube } from './math';
 
 cube(5);

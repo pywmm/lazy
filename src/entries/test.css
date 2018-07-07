@@ -1,3 +1,7 @@
 body {
-    background: pink url('./test.jpeg');
+  background: pink url('./test.jpg');
+}
+
+img {
+  width: 100%;
 }

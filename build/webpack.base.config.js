@@ -11,30 +11,6 @@ module.exports = {
   // devtool: isProd
   //   ? 'source-map'
   //   : false,
-  // mode: 'development',
-  mode: 'production',
-  devtool: 'inline-source-map',
-  devServer: {
-    // contentBase: path.resolve(__dirname, '../dist'),
-    port: 9000,
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/test/, to: '/index.html' },
-      ],
-    },
-    hot: true,
-    noInfo: false,
-    overlay: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        pathRewrite: { '^/api': '' },
-      },
-    },
-    quiet: false,
-    open: true,
-    // publicPath: '/assets/2/',
-  },
   entry: {
     app: path.resolve(__dirname, '../src/entries/app.js'),
     app2: path.resolve(__dirname, '../src/entries/app2.js'),
