@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
 
 const vueConfig = require('./vue-loader.config');
 
@@ -26,8 +25,8 @@ module.exports = {
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -46,12 +45,9 @@ module.exports = {
       // chunks: ['app'],
       title: '121212',
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'another.html',
-    // }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       name: 'testSplitChunks',
