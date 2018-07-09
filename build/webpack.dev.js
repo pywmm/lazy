@@ -6,8 +6,8 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[name].bundle.js',
   },
   devServer: {
     // contentBase: path.resolve(__dirname, '../dist'),
