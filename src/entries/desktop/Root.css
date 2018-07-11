@@ -1,0 +1,17 @@
+.Root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Root-menu {
+  border-radius: 0;
+}
+
+.Root-setting {
+  float: right !important;
+}
+
+.ql-toolbar {
+  line-height: 1;
+}

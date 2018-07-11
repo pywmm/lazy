@@ -1,0 +1,29 @@
+.Page {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  margin-top: 12px;
+  flex-direction: column;
+}
+
+.Page-pagination {
+  display: flex;
+  justify-content: center;
+  padding: .4rem 0;
+}
+
+.Page-queryForm {
+  padding: 0 10px;
+}
+
+.Page-queryFormItem {
+  margin: 0;
+}
+
+.Page-queryButton {
+  margin-left: .1rem;
+}
+
+.Page-copy {
+  margin: 0 8px;
+}

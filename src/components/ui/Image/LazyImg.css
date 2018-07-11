@@ -1,0 +1,10 @@
+.LazyImg-Img {
+  background-color: #f1f1f1;
+  pointer-events: none;
+  transition: opacity 600ms ease-in-out;
+}
+
+.LazyImg-bg {
+  pointer-events: auto;
+  transition: opacity 600ms ease-in-out;
+}

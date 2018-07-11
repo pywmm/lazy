@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const { VueLoaderPlugin } = require('vue-loader');
 const vueConfig = require('./vue-loader.config');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -11,7 +11,7 @@ module.exports = {
   //   ? 'source-map'
   //   : false,
   entry: {
-    app: path.resolve(__dirname, '../src/entries/app.js'),
+    app: path.resolve(__dirname, '../src/entries/desktop/app.js'),
     app2: path.resolve(__dirname, '../src/entries/app2.js'),
     // vendor: [
     //   'es6-promise/auto',
@@ -36,15 +36,13 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '../'),
-    }),
     new HtmlWebpackPlugin({
       filename: 'index.html', // the name of html file which created at last
       template: path.resolve(__dirname, '../src/index.html'), // html template
       // chunks: ['app'],
       title: '121212',
     }),
+    new VueLoaderPlugin(),
   ],
   optimization: {
     runtimeChunk: 'single',
