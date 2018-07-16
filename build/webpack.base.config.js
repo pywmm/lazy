@@ -13,6 +13,7 @@ module.exports = {
   entry: {
     app: path.resolve(__dirname, '../src/entries/desktop/app.js'),
     app2: path.resolve(__dirname, '../src/entries/app2.js'),
+    sw: path.resolve(__dirname, '../src/entries/sw.js'),
     // vendor: [
     //   'es6-promise/auto',
     //   'vue',
