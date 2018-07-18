@@ -11,7 +11,7 @@
     "start": "webpack-dev-server --config ./build/webpack.dev.js",
     "server": "node ./src/entries/server.js",
     "koa": "node --inspect ./src/server.js",
-    "server:desktop": "BABEL_ENV=dev node ./bin/desktop.js"
+    "server:desktop": "BABEL_ENV=dev node --inspect ./bin/desktop.js"
   },
   "author": "",
   "license": "ISC",
