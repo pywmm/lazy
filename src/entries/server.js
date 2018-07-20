@@ -1,5 +1,5 @@
-// const fs = require('fs');
-// const path = require('path');
+const fs = require('fs');
+const path = require('path');
 const Koa = require('koa');
 const { createBundleRenderer } = require('vue-server-renderer');
 
@@ -11,10 +11,14 @@ const home = new Router();
 
 const bundle = require('../../dist/vue-ssr-server-bundle.json');
 
+const template = fs.readFileSync(path.resolve(__dirname, './../index.html'), {
+  encoding: 'utf-8',
+});
+
 // eslint-disable-line global-require, import/no-dynamic-require, max-len
 const renderer = createBundleRenderer(bundle, {
   runInNewContext: false, // 推荐
-  // template, // （可选）页面模板
+  template, // （可选）页面模板
   // clientManifest // （可选）客户端构建 manifest
 });
 
@@ -30,12 +34,19 @@ const renderer = createBundleRenderer(bundle, {
 // });
 
 home.get('/test', async (ctx) => {
-  ctx.body = 'waring.....';
-  renderer.renderToString(ctx, (err, html) => {
-    console.dir(err);
-    // 处理异常……
-    ctx.body = html;
+  // ctx.body = 'waring.....';
+  ctx.body = await renderer.renderToString(ctx).catch((err) => {
+    // logger.error('render error', err);
+    throw err;
   });
+
+  // renderer.renderToString(ctx, (err, html) => {
+  //   console.dir(html);
+  //   // 处理异常……
+  //   ctx.body = html;
+  // }, () => {
+  //   console.log('error');
+  // });
 });
 
 // 加载路由中间件

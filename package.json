@@ -9,7 +9,7 @@
     "fix": "./node_modules/.bin/eslint src/* build/* --fix",
     "build": "webpack --config ./build/webpack.prd.js",
     "start": "webpack-dev-server --config ./build/webpack.dev.js",
-    "server": "node ./src/entries/server.js",
+    "server": "node --inspect ./src/entries/server.js",
     "build:server": "webpack --config ./build/webpack.server.js"
   },
   "author": "",
