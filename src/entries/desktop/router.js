@@ -6,19 +6,24 @@ import Page from '@/views/desktop/Page';
 Vue.use(Router);
 
 export function createRouter() {
-  return new Router({
+  const router = new Router({
     base: process.env.NODE_ENV === 'production' ? '/vinci/' : '/',
     mode: 'history',
     routes: [
       {
-        path: '/',
-        component: { template: '<div>index</div>' },
+        path: '/:id',
+        component: { template: '<div>index{{ $route.params.id }}</div>' },
       },
       {
-        path: '/page',
+        path: '/page/:id',
         name: 'page',
         component: Page,
       },
     ],
   });
+  // router.beforeEach((to, from, next) => {
+  //   // ...
+  //   next();
+  // });
+  return router;
 }

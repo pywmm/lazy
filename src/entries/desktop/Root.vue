@@ -20,6 +20,7 @@
         {{ item.name }}
       </el-menu-item>
     </el-menu>
+    <router-link to="/3">Go to page</router-link>
     <router-view :key="$route.path" />
   </div>
 </template>
@@ -46,6 +47,11 @@ export default {
     };
   },
 
+  asyncData({ store, route }) {
+    // 触发 action 后，会返回 Promise
+    return store.dispatch('fetchItem', route.params.id);
+  },
+
   computed: {
     ...mapState({
       activeLink(state) {
@@ -55,8 +61,9 @@ export default {
     }),
 
     menuShown() {
-      const { matched } = this.$route;
-      return !(matched && matched[matched.length - 1].name === 'preview');
+      // const { matched } = this.$route;
+      return true;
+      // return !(matched && matched[matched.length - 1].name === 'preview');
     },
   },
 };

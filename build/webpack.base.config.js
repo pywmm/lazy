@@ -11,8 +11,8 @@ module.exports = {
   //   ? 'source-map'
   //   : false,
   entry: {
-    app: path.resolve(__dirname, '../src/entries/desktop/app.js'),
-    app2: path.resolve(__dirname, '../src/entries/app2.js'),
+    // app: path.resolve(__dirname, '../src/entries/desktop/entry-client.js'),
+    // app2: path.resolve(__dirname, '../src/entries/app2.js'),
     // vendor: [
     //   'es6-promise/auto',
     //   'vue',
@@ -33,6 +33,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../src'),
+      api: path.resolve(__dirname, '../api'),
     },
   },
   plugins: [
@@ -44,30 +45,30 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
   ],
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-      name: 'testSplitChunks',
-      minSize: 30000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          name: 'vendors',
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true,
-        },
-      },
-    },
-  },
+  // optimization: {
+  //   runtimeChunk: 'single',
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     name: 'testSplitChunks',
+  //     minSize: 30000,
+  //     minChunks: 1,
+  //     maxAsyncRequests: 5,
+  //     maxInitialRequests: 3,
+  //     automaticNameDelimiter: '~',
+  //     cacheGroups: {
+  //       vendors: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         priority: -10,
+  //         name: 'vendors',
+  //       },
+  //       default: {
+  //         minChunks: 2,
+  //         priority: -20,
+  //         reuseExistingChunk: true,
+  //       },
+  //     },
+  //   },
+  // },
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [

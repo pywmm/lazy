@@ -11,7 +11,7 @@ import {
 import Image from '@/components/ui/Image';
 import Root from '@/entries/desktop/Root';
 import { createRouter } from '@/entries/desktop/router';
-import createStore from '@/entries/desktop/store';
+import { createStore } from '@/entries/desktop/store';
 // import initAxios from '@/entries/desktop/axios';
 
 Vue.config.productionTip = false;
@@ -33,7 +33,7 @@ Vue.prototype.$message = Message;
 Vue.use(Vuex);
 
 const router = createRouter();
-const store = createStore('desktop');
+const store = createStore();
 
 // initAxios();
 
@@ -41,9 +41,22 @@ sync(store, router);
 
 // Vue.prototype.$store = store;
 
-new Vue({ // eslint-disable-line no-new
-  router,
-  store,
-  el: '#test',
-  render: h => h(Root),
-});
+// new Vue({ // eslint-disable-line no-new
+//   router,
+//   store,
+//   el: '#test',
+//   render: h => h(Root),
+// });
+
+
+// 导出一个工厂函数，用于创建新的
+// 应用程序、router 和 store 实例
+export function createApp() {
+  const app = new Vue({
+    router,
+    store,
+    // 根实例简单的渲染应用程序组件。
+    render: h => h(Root),
+  });
+  return { app, router, store };
+}
