@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
+const serve = require('koa-static');
+const mount = require('koa-mount');
 const { createBundleRenderer } = require('vue-server-renderer');
 
 const app = new Koa();
@@ -9,7 +11,10 @@ const Router = require('koa-router');
 
 const home = new Router();
 
+const resolve = file => path.resolve(__dirname, file);
+
 const bundle = require('../../dist/vue-ssr-server-bundle.json');
+const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
 
 const template = fs.readFileSync(path.resolve(__dirname, './../index.html'), {
   encoding: 'utf-8',
@@ -19,19 +24,16 @@ const template = fs.readFileSync(path.resolve(__dirname, './../index.html'), {
 const renderer = createBundleRenderer(bundle, {
   runInNewContext: false, // 推荐
   template, // （可选）页面模板
-  // clientManifest // （可选）客户端构建 manifest
+  clientManifest, // （可选）客户端构建 manifest
+  basedir: resolve('./dist'),
 });
 
-// 在服务器处理函数中……
-// home.get('*', (req, res) => {
-//   const context = { url: req.url };
-//   // 这里无需传入一个应用程序，因为在执行 bundle 时已经自动创建过。
-//   // 现在我们的服务器与应用程序已经解耦！
-//   renderer.renderToString(context, (err, html) => {
-//     // 处理异常……
-//     res.end(html);
-//   });
-// });
+app.use(mount('/', serve(resolve('../../dist/'), {
+  maxage: 9999999999,
+  setHeaders(res) {
+    res.setHeader('Last-Modified', 'Tue, 19 Jun 2011 08:12:57 GMT');
+  },
+})));
 
 home.get('/test', async (ctx) => {
   // ctx.body = 'waring.....';
@@ -39,14 +41,6 @@ home.get('/test', async (ctx) => {
     // logger.error('render error', err);
     throw err;
   });
-
-  // renderer.renderToString(ctx, (err, html) => {
-  //   console.dir(html);
-  //   // 处理异常……
-  //   ctx.body = html;
-  // }, () => {
-  //   console.log('error');
-  // });
 });
 
 // 加载路由中间件
