@@ -4,11 +4,16 @@ const Koa = require('koa');
 const serve = require('koa-static');
 const mount = require('koa-mount');
 const { createBundleRenderer } = require('vue-server-renderer');
+const koaPackageJson = require('koa/package.json');
+const vsrPackageJson = require('vue-server-renderer/package.json');
 const setUpDevServer = require('./../build/setup-dev-server');
 
 const isProd = process.env.NODE_ENV === 'production';
 const app = new Koa();
 const resolve = file => path.resolve(__dirname, file);
+
+const serverInfo = `koa/${koaPackageJson.version} vue-server-renderer/${vsrPackageJson.version}`;
+
 const template = fs.readFileSync(path.resolve(__dirname, './index.html'), {
   encoding: 'utf-8',
 });
@@ -77,7 +82,7 @@ app.use(async (ctx) => {
   }
 
   ctx.set('Content-Type', 'text/html');
-  // ctx.set('Server', serverInfo);
+  ctx.set('Server', serverInfo);
 
   ctx.type = 'text/html; charset=utf-8';
   ctx.status = 200;
