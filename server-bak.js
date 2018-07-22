@@ -13,10 +13,10 @@ const home = new Router();
 
 const resolve = file => path.resolve(__dirname, file);
 
-const bundle = require('../../dist/vue-ssr-server-bundle.json');
-const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
+const bundle = require('./dist/vue-ssr-server-bundle.json');
+const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 
-const template = fs.readFileSync(path.resolve(__dirname, './../index.html'), {
+const template = fs.readFileSync(path.resolve(__dirname, './src/index.html'), {
   encoding: 'utf-8',
 });
 
@@ -25,17 +25,16 @@ const renderer = createBundleRenderer(bundle, {
   runInNewContext: false, // 推荐
   template, // （可选）页面模板
   clientManifest, // （可选）客户端构建 manifest
-  basedir: resolve('./dist'),
 });
 
-app.use(mount('/', serve(resolve('../../dist/'), {
+app.use(mount('/', serve(resolve('./dist/'), {
   maxage: 9999999999,
   setHeaders(res) {
     res.setHeader('Last-Modified', 'Tue, 19 Jun 2011 08:12:57 GMT');
   },
 })));
 
-home.get('/test', async (ctx) => {
+home.get('*', async (ctx) => {
   // ctx.body = 'waring.....';
   ctx.body = await renderer.renderToString(ctx).catch((err) => {
     // logger.error('render error', err);
@@ -47,5 +46,6 @@ home.get('/test', async (ctx) => {
 app.use(home.routes()).use(home.allowedMethods());
 
 app.listen(9000, () => {
+  console.log('🌏  http server started at localhost:9000');
   // logger.info(`🌏  http server started at localhost:${port}`);
 });

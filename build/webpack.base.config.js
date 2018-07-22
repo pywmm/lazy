@@ -45,30 +45,6 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
   ],
-  // optimization: {
-  //   runtimeChunk: 'single',
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     name: 'testSplitChunks',
-  //     minSize: 30000,
-  //     minChunks: 1,
-  //     maxAsyncRequests: 5,
-  //     maxInitialRequests: 3,
-  //     automaticNameDelimiter: '~',
-  //     cacheGroups: {
-  //       vendors: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         priority: -10,
-  //         name: 'vendors',
-  //       },
-  //       default: {
-  //         minChunks: 2,
-  //         priority: -20,
-  //         reuseExistingChunk: true,
-  //       },
-  //     },
-  //   },
-  // },
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
